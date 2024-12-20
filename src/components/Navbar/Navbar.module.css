@@ -1,0 +1,33 @@
+ /*.bgnav{
+    box-shadow: 
+      rgba(0, 0, 0, 0.924) 30px 0px 80px -12px inset, /* Right side 
+      rgba(0, 0, 0, 0.924) -30px 0px 80px -12px inset; /* Left side  
+      height: auto;
+     background: #262463   ;
+
+}
+      
+  */ 
+  
+.glassNavcontainer {
+   
+
+    background: rgba(255, 255, 255, 0.045); 
+
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    backdrop-filter: blur(10px); /* Frosted-glass blur effect */
+    -webkit-backdrop-filter: blur(10px);
+    /* For Safari support */
+   
+}
+.nlogin{
+  background: #6472ba6d;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  backdrop-filter: blur(10px); /* Frosted-glass blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari support */
+
+}
+.active{
+color: #3b82f6;
+
+}
