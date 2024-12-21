@@ -6,6 +6,7 @@ import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
+import Contact from "./components/Contact/Contact";
 
 let x = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ let x = createBrowserRouter([
       { path: "/profile", element: <Profile /> },
     ],
   },
+
   { path: "/register", element: <Register /> },
   { path: "/login", element: <Login /> },
   { path: "*", element: <h1>404 Not Found</h1> },

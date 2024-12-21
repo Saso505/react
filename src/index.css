@@ -11,9 +11,15 @@
   /* Right side */ rgba(0, 0, 0, 0.924) -30px 0px 80px -12px inset; /* Left side */
   
   background: #262463;
+  width: 100%;
+  
 
 
 }
+/* .active{
+  color: #3b82f6;
+  
+  } */
 
 .glass-container {
   /* width: 550px; /* Width of the container */

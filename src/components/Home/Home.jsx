@@ -1,8 +1,12 @@
+
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import style from "./Home.module.css";
 import homebg from "../../assets/eyevideo.mp4";
 import splitStringUsingRegex from "../../utality/spling";
+import Contact from "../Contact/Contact";
+import Feature from "../Feature/Feature";
+
 
 export default function Home() {
   // State initialization (you can uncomment it if required for future functionality)
@@ -18,19 +22,20 @@ export default function Home() {
 
   return (
     <>
-    <div className="home bg ">
-      <div className="landing w-full h-screen relative">
+    <div className="home bg  h-auto w-full  bg-black ">
+      
+      <div className="landing w-full h-screen     relative">
         {/* Video Background */}
-        <div className=" inset-0 w-full h-full  xsm:hidden  md:flex">
+        <div className=" inset-0 w-full h-full relative bg-[#040108] xsm:hidden  md:flex justify-center items-center ">
           <video
-            className="w-full h-full object-cover sm:hidden  md:flex "
+            className="  absolute top-24 w-[80%] h-[80%]  object-cover sm:hidden  md:flex    "
             autoPlay
             loop
             muted
             playsInline
           >
             <source src={homebg} type="video/mp4" />
-            Your browser does not support the video tag.
+       
           </video>
         </div>
 
@@ -41,6 +46,12 @@ export default function Home() {
           <p className="py-5 text-slate-300 text-lg">{text}</p>
         </div>
       </div>
+
+<Feature/>
+
+      <Contact />
+
+      
       </div>
     </>
   );

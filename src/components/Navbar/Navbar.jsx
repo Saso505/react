@@ -9,18 +9,29 @@ import { Link, NavLink } from 'react-router-dom';
 export default function Navbar() {
     // Example state initialization (if needed)
     const [isMenuOpen, setisMenuOpen] = useState(false);
+    const [Color, setColor] = useState(false);
+    const changeColor = () => {
+      if(window.scrollY >=90){
+        setColor(true)
+      }
+      else{
+        setColor(false)
+      }
+    
+    } 
 
+    window.addEventListener('scroll', changeColor);
     useEffect(() => {
         // Example logic (if needed)
         console.log('Component mounted');
     }, []);
 
     return <>
-<nav className=  "fixed w-full z-20 top-0   start-0  px-8">
+<nav className=  {`fixed w-full z-20 top-0   start-0  px-8 ${Color ?    'shadow-md backdrop-blur-3xl backdrop-brightness-110':'bg-transparent'} `}>
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto ">
   <a href="" className="flex items-center space-x-3 rtl:space-x-reverse">
-        <img className="lg:w-24  xsm:w-14  sm:w-20 " src={navLogo} alt="Navlogo" /> 
-        <span className="self-center text-lg font-lato font-semibold sm:hidden xsm:flex mb-1 whitespace-nowrap dark:text-white">Eye  of  Veritas</span>
+        <img className="lg:w-24 xsm:w-14  sm:w-20 " src={navLogo} alt="Navlogo" /> 
+        <span className="self-center text-lg font-lato font-semibold sm:hidden xsm:flex mb-1 whitespace-nowrap text-slate-100   dark: text-slate-100  ">Eye  of  Veritas</span>
   </a>
   <div class="md:order-2 space-x-3 md:space-x-0  rtl:space-x-reverse">
   <button
@@ -32,26 +43,36 @@ export default function Navbar() {
 
     
   </div>
-  <div className={`${style.glassNavcontainer} md:px-[2rem]  lg:px-[3rem]  py-[0.5rem] rounded-full  items-center justify-between hidden w-full  md:flex md:w-auto  md:order-1 `} id="navbar-sticky">
-    <ul className="flex flex-col  xl:mx-2 px-3 md:p-0 mt-4 font-medium border border-gray-100 rounded- bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-transparent ">
+  <div 
+  className={` 
+    ${Color ?   'bg-[#6472ba6d] shadow-md backdrop-blur-3xl backdrop-brightness-110':'bg-[#6472ba6d] shadow-md backdrop-blur-md backdrop-brightness-110'}  
+    md:px-[2rem] lg:px-[3rem] py-[0.5rem] rounded-full 
+    items-center justify-between hidden w-full md:flex md:w-auto md:order-1
+  `}
+  id="navbar-sticky"
+>
+
+
+    <ul className="flex flex-col  xl:mx-2 px-3 md:p-0 mt-4 font-medium border border-gray-100 rounded-  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-transparent ">
       <li>
-        <NavLink to="/" className="block font-lato  xl:mx-2 xl:px-3 text-white  rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</NavLink>
+        <NavLink to="/" className="block font-lato  xl:mx-2 xl:px-3 text-slate-100  rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</NavLink>
       </li>
       
       <li>
-        <NavLink to="" className="block font-lato  xl:mx-2 xl:px-3 text-gray-900 rounded  md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</NavLink>
+        <NavLink to="" className="block font-lato  xl:mx-2 xl:px-3 rounded text-slate-100  md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</NavLink>
       </li>
       <li>
-        <NavLink to="#" className="block font-lato  xl:mx-2 xl:px-3 text-gray-900 rounded  md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Featue</NavLink>
+        <NavLink to="" className="block font-lato  xl:mx-2 xl:px-3 rounded text-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Featue</NavLink>
       </li>
       <li>
-        <NavLink to="#" className="block font-lato  xl:mx-2 xl:px-3 text-gray-900 rounded  md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Team</NavLink>
+        <NavLink to="" className="block font-lato  xl:mx-2 xl:px-3 rounded text-slate-100  md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Team</NavLink>
       </li>
       <li>
-        <NavLink to="#" className="block font-lato  xl:mx-2 xl:px-3 text-gray-900 rounded  md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</NavLink>
+        <NavLink to=""  
+ className="block font-lato  xl:mx-2 xl:px-3 rounded  text-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</NavLink>
       </li>
       <li>
-        <NavLink to="/archives" className="block font-lato  xl:mx-2 xl:px-3 text-gray-900 rounded  md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Archives</NavLink>
+        <NavLink to="/archives" className="block font-lato  xl:mx-2 xl:px-3 rounded text-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Archives</NavLink>
       </li>
       
     </ul>
@@ -69,24 +90,24 @@ style={{transition : "transform 0.3s ease ,opacity 0.3s ease"}}
 >
 
       <li className='list-none'>
-        <NavLink to="#" className=" transition-all cursor-pointer py-3   w-full font-lato  xl:mx-2 xl:px-3 
+        <NavLink to="#" className=" transition-all cursor-pointer py-3 text-slate-100  w-full font-lato  xl:mx-2 xl:px-3 
           hover:border-slate-300 rounded md:bg-transparent " aria-current="page">Home</NavLink>
       </li>
       
       <li className='list-none'>
-        <NavLink to="#" className=" transition-all cursor-pointer py-3  w-full font-lato  xl:mx-2 xl:px-3  rounded    md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white ">Services</NavLink>
+        <NavLink to="#" className=" transition-all cursor-pointer py-3 text-slate-100 w-full font-lato  xl:mx-2 xl:px-3  rounded    md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white ">Services</NavLink>
       </li>
       <li className='list-none'>
-        <NavLink to="#" className=" transition-all cursor-pointer py-3  w-full font-lato  xl:mx-2 xl:px-3 rounded   md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white ">Feature</NavLink>
+        <NavLink to="#" className=" transition-all cursor-pointer py-3 text-slate-100 w-full font-lato  xl:mx-2 xl:px-3 rounded   md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white ">Feature</NavLink>
       </li>
       <li className='list-none'>
-        <NavLink to="#" className=" transition-all cursor-pointer py-3 list-none w-full font-lato  xl:mx-2 xl:px-3 rounded   hover:border-b  hover:border-slate-300md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white ">Team</NavLink>
+        <NavLink to="#" className=" transition-all cursor-pointer py-3 text-slate-100 list-none w-full font-lato  xl:mx-2 xl:px-3 rounded   hover:border-b  hover:border-slate-300md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white ">Team</NavLink>
       </li>
       <li className='list-none'>
-        <NavLink to="#" className=" transition-all cursor-pointer py-3 list-none w-full font-lato  xl:mx-2 xl:px-3 rounded     hover:border-b   md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white ">Contact</NavLink>
+        <NavLink to="#" className=" transition-all cursor-pointer py-3 text-slate-100  list-none w-full font-lato  xl:mx-2 xl:px-3 rounded     hover:border-b   md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white ">Contact</NavLink>
       </li>
       <li className='list-none'>
-        <NavLink to="#" className=" transition-all cursor-pointer py-2 list-none w-full font-lato  xl:mx-2 xl:px-3 rounded    md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white e">Archives</NavLink>
+        <NavLink to="#" className=" transition-all cursor-pointer py-2 text-slate-100 list-none w-full font-lato  xl:mx-2 xl:px-3 rounded    md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white e">Archives</NavLink>
       </li>
       </div>
 
