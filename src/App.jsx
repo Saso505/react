@@ -15,6 +15,10 @@ let x = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/home", element: <Home /> },
+      {
+        path: "/home/contact",
+        element: <Contact />,  // Nested route for team inside /home
+      },
       { path: "/archives", element: <Archives /> },
 
       { path: "/profile", element: <Profile /> },

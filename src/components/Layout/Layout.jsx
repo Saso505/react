@@ -19,7 +19,7 @@ export default function Layout() {
     <div className={style.container}>
       <Navbar />
       <Outlet></Outlet>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }

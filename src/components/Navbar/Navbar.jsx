@@ -1,120 +1,220 @@
 /* eslint-disable */
-
-import React, { useEffect, useState } from 'react';
-import style from './Navbar.module.css';
-import navLogo from '../../assets/navLogo.png'
-import { Link, NavLink } from 'react-router-dom';
-
+import React, { useEffect, useState } from "react";
+import style from "./Navbar.module.css";
+import navLogo from "../../assets/navLogo.png";
+import { Link, useNavigate } from "react-router-dom";
+import { SectionId } from "../sectionId/Section";
 
 export default function Navbar() {
-    // Example state initialization (if needed)
-    const [isMenuOpen, setisMenuOpen] = useState(false);
-    const [Color, setColor] = useState(false);
-    const changeColor = () => {
-      if(window.scrollY >=90){
-        setColor(true)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeLink, setActiveLink] = useState("home"); // Default active link set to "home"
+  const navigate = useNavigate();
+
+  // Smooth scroll to sections
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const scrollToY = element.offsetTop;
+      window.scrollTo({ top: scrollToY, behavior: "smooth" });
+      setActiveLink(sectionId);
+    }
+    setIsMenuOpen(false); // Close mobile menu
+  };
+
+  // Detect active section while scrolling
+  const determineActiveSection = () => {
+    if (!SectionId || SectionId.length === 0) return;
+
+    let isAnySectionActive = false;
+
+    for (let i = SectionId.length - 1; i >= 0; i--) {
+      const section = document.getElementById(SectionId[i]);
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 150 && rect.bottom >= 150) {
+          setActiveLink(SectionId[i]);
+          isAnySectionActive = true;
+          break;
+        }
       }
-      else{
-        setColor(false)
-      }
-    
-    } 
+    }
 
-    window.addEventListener('scroll', changeColor);
-    useEffect(() => {
-        // Example logic (if needed)
-        console.log('Component mounted');
-    }, []);
+    // Fallback to "home" if no other section is detected as active
+    if (!isAnySectionActive) {
+      setActiveLink("home");
+    }
+  };
 
-    return <>
-<nav className=  {`fixed w-full z-20 top-0   start-0  px-8 ${Color ?    'shadow-md backdrop-blur-3xl backdrop-brightness-110':'bg-transparent'} `}>
-  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto ">
-  <a href="" className="flex items-center space-x-3 rtl:space-x-reverse">
-        <img className="lg:w-24 xsm:w-14  sm:w-20 " src={navLogo} alt="Navlogo" /> 
-        <span className="self-center text-lg font-lato font-semibold sm:hidden xsm:flex mb-1 whitespace-nowrap text-slate-100   dark: text-slate-100  ">Eye  of  Veritas</span>
-  </a>
-  <div class="md:order-2 space-x-3 md:space-x-0  rtl:space-x-reverse">
-  <button
-  type="button"
-  className={`${style.nlogin} lg:px-[3rem] md:px-[1.5rem] text-white xsm:hidden md:flex focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:focus:ring-blue-800`}
->
-  <NavLink to="/login">Login</NavLink> 
-</button>
+  // Handle page navigation with smooth scrolling
+  const handlePageNavigation = (path) => {
+    setActiveLink(path.slice(1)); // Update active link
+    navigate(path);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsMenuOpen(false); // Close mobile menu
+  };
 
-    
-  </div>
-  <div 
-  className={` 
-    ${Color ?   'bg-[#6472ba6d] shadow-md backdrop-blur-3xl backdrop-brightness-110':'bg-[#6472ba6d] shadow-md backdrop-blur-md backdrop-brightness-110'}  
-    md:px-[2rem] lg:px-[3rem] py-[0.5rem] rounded-full 
-    items-center justify-between hidden w-full md:flex md:w-auto md:order-1
-  `}
-  id="navbar-sticky"
->
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 300);
+      determineActiveSection();
+    };
 
+    const debouncedHandleScroll = debounce(handleScroll, 50); // Optimize scroll performance
 
-    <ul className="flex flex-col  xl:mx-2 px-3 md:p-0 mt-4 font-medium border border-gray-100 rounded-  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-transparent ">
-      <li>
-        <NavLink to="/" className="block font-lato  xl:mx-2 xl:px-3 text-slate-100  rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</NavLink>
-      </li>
-      
-      <li>
-        <NavLink to="" className="block font-lato  xl:mx-2 xl:px-3 rounded text-slate-100  md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</NavLink>
-      </li>
-      <li>
-        <NavLink to="" className="block font-lato  xl:mx-2 xl:px-3 rounded text-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Featue</NavLink>
-      </li>
-      <li>
-        <NavLink to="" className="block font-lato  xl:mx-2 xl:px-3 rounded text-slate-100  md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Team</NavLink>
-      </li>
-      <li>
-        <NavLink to=""  
- className="block font-lato  xl:mx-2 xl:px-3 rounded  text-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</NavLink>
-      </li>
-      <li>
-        <NavLink to="/archives" className="block font-lato  xl:mx-2 xl:px-3 rounded text-slate-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Archives</NavLink>
-      </li>
-      
-    </ul>
-   
-  </div>
-  <button onClick={()=> setisMenuOpen(!isMenuOpen) }data-collapse-toggle="navbar-sticky" type="button" className=" bg-white inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  cursor-pointer xsm:flex hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+    window.addEventListener("scroll", debouncedHandleScroll);
+    return () => {
+      window.removeEventListener("scroll", debouncedHandleScroll);
+    };
+  }, []);
 
-<svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-</svg>
+  // Debounce utility
+  const debounce = (func, delay) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), delay);
+    };
+  };
 
-</button>
-<div className={`abalute top-36 md:hidden left-0 w-full py-3 ${style.glassNavcontainer} flex flex-col items-center gap-7 text-lg transform transition-transform ${isMenuOpen ? "opacity-100":"opacity-0"} `}
-style={{transition : "transform 0.3s ease ,opacity 0.3s ease"}}
->
+  return (
+    <nav
+      className={`${style.navbarTransition} ${
+        isScrolled ? style.scrolled : ""
+      } fixed w-full z-20 top-0 px-8`}
+    >
+      <div className="max-w-screen-xl flex items-center justify-between mx-auto">
+        {/* Logo */}
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img className="md:w-16 xsm:w-14" src={navLogo} alt="Nav Logo" />
+          <span className="self-center text-lg font-lato font-semibold md:hidden xsm:flex mb-1 whitespace-nowrap text-slate-100">
+            Eye of Veritas
+          </span>
+        </a>
 
-      <li className='list-none'>
-        <NavLink to="#" className=" transition-all cursor-pointer py-3 text-slate-100  w-full font-lato  xl:mx-2 xl:px-3 
-          hover:border-slate-300 rounded md:bg-transparent " aria-current="page">Home</NavLink>
-      </li>
-      
-      <li className='list-none'>
-        <NavLink to="#" className=" transition-all cursor-pointer py-3 text-slate-100 w-full font-lato  xl:mx-2 xl:px-3  rounded    md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white ">Services</NavLink>
-      </li>
-      <li className='list-none'>
-        <NavLink to="#" className=" transition-all cursor-pointer py-3 text-slate-100 w-full font-lato  xl:mx-2 xl:px-3 rounded   md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white ">Feature</NavLink>
-      </li>
-      <li className='list-none'>
-        <NavLink to="#" className=" transition-all cursor-pointer py-3 text-slate-100 list-none w-full font-lato  xl:mx-2 xl:px-3 rounded   hover:border-b  hover:border-slate-300md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white ">Team</NavLink>
-      </li>
-      <li className='list-none'>
-        <NavLink to="#" className=" transition-all cursor-pointer py-3 text-slate-100  list-none w-full font-lato  xl:mx-2 xl:px-3 rounded     hover:border-b   md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white ">Contact</NavLink>
-      </li>
-      <li className='list-none'>
-        <NavLink to="#" className=" transition-all cursor-pointer py-2 text-slate-100 list-none w-full font-lato  xl:mx-2 xl:px-3 rounded    md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white e">Archives</NavLink>
-      </li>
+        {/* Login Button */}
+        <div className="md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <button
+            type="button"
+            className={`${style.nlogin} lg:px-[3rem] md:px-[1.5rem] text-white xsm:hidden md:flex focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center`}
+          >
+            <Link to="/login">Login</Link>
+          </button>
+        </div>
+
+        {/* Navigation Links */}
+        <div
+          className={`${style.glassNavcontainer} ${
+            isMenuOpen
+              ? "flex absolute top-20 left-0 right-0 rounded"
+              : "hidden"
+          } md:px-[1rem] lg:px-[3rem] md:py-[0.3rem] lg:py-[0.5rem] md:rounded-full md:space-x-8 rounded-md items-center justify-between md:flex md:w-auto md:order-1`}
+          id="navbar-menu"
+        >
+          <ul className="flex flex-col md:flex-row items-center gap-4 md:gap-8 xsm:w-full md:w-auto md:bg-transparent md:rounded-full p-4 md:p-0 xsm:justify-center">
+            <li
+              className={`${
+                activeLink === "home"
+                  ? `relative after:absolute after:w-7 after:h-[0.125rem] after:left-4 after:bg-[#0077ff]`
+                  : ""
+              }`}
+            >
+              <button
+                onClick={() => handlePageNavigation("/home")}
+                className={`block font-lato xl:mx-2 xl:px-2 rounded ${
+                  activeLink === "home"
+                    ? `text-[#0077ff] font-semibold`
+                    : "text-slate-100"
+                }`}
+              >
+                Home
+              </button>
+            </li>
+            {SectionId.map((sectionId, i) => (
+              <li
+                key={i}
+                className={`${
+                  activeLink === sectionId
+                    ? `relative after:absolute after:w-7 after:h-[0.125rem] after:left-4 after:bg-[#0077ff]`
+                    : ""
+                }`}
+              >
+                <button
+                  onClick={() => scrollToSection(sectionId)}
+                  className={`block font-lato xl:mx-2 xl:px-2 rounded ${
+                    activeLink === sectionId
+                      ? `text-[#0077ff] font-semibold`
+                      : "text-slate-100"
+                  }`}
+                >
+                  {sectionId}
+                </button>
+              </li>
+            ))}
+            <li
+              className={`${
+                activeLink === "archives"
+                  ? `relative after:absolute after:w-7 after:h-[0.125rem] after:left-4 after:bg-[#0077ff]`
+                  : ""
+              }`}
+            >
+              <button
+                onClick={() => handlePageNavigation("/archives")}
+                className={`block font-lato xl:mx-2 xl:px-2 rounded ${
+                  activeLink === "archives"
+                    ? `text-[#0077ff] font-semibold`
+                    : "text-slate-100"
+                }`}
+              >
+                Archives
+              </button>
+            </li>
+            <li
+              className={`${
+                activeLink === "profile"
+                  ? `relative after:absolute after:w-7 after:h-[0.125rem] after:left-4 after:bg-[#0077ff]`
+                  : ""
+              }`}
+            >
+              <button
+                onClick={() => handlePageNavigation("/profile")}
+                className={`block font-lato xl:mx-2 xl:px-2 rounded ${
+                  activeLink === "profile"
+                    ? `text-[#0077ff] font-semibold`
+                    : "text-slate-100"
+                }`}
+              >
+                Profile
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        {/* Mobile Menu Toggle */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-controls="navbar-menu"
+          aria-expanded={isMenuOpen}
+          type="button"
+          className="bg-white inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden cursor-pointer xsm:flex hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+        >
+          <svg
+            className="w-5 h-5"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 17 14"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M1 1h15M1 7h15M1 13h15"
+            />
+          </svg>
+        </button>
       </div>
-
-  </div>
-</nav>
-
-
-    </>
-    
+    </nav>
+  );
 }

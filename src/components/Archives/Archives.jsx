@@ -12,9 +12,11 @@ export default function Archives() {
         console.log('Component mounted');
     }, []);
 
-    return (
-        <div className={style.container}>
-         Archives
+    return < >
+        <div className="archives bg h-screen">
+            Archives
         </div>
-    );
+
+    </>
+        ;
 }

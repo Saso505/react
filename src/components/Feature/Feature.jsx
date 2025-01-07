@@ -6,7 +6,7 @@ import React from "react";
 export default function Feature() {
   return (
     <>
-      <div id="feature" className="feature py-12 ">
+      <div id="Feature" className="feature py-12 ">
         <div className="head flex justify-center items-center flex-col text-center py-2">
           <span className="text-slate-100 tex-sm">Feature</span>
           <h2 className="font-Abril text-slate-100  text-5xl">

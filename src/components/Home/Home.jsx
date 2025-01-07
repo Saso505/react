@@ -6,6 +6,8 @@ import homebg from "../../assets/eyevideo.mp4";
 import splitStringUsingRegex from "../../utality/spling";
 import Contact from "../Contact/Contact";
 import Feature from "../Feature/Feature";
+import Service from "../Service/Service";
+import Team from "../Team/Team";
 
 
 export default function Home() {
@@ -22,7 +24,7 @@ export default function Home() {
 
   return (
     <>
-    <div className="home bg  h-auto w-full  bg-black ">
+    <div className="home bg  h-auto w-full  bg-black " id="Home">
       
       <div className="landing w-full h-screen     relative">
         {/* Video Background */}
@@ -46,9 +48,9 @@ export default function Home() {
           <p className="py-5 text-slate-300 text-lg">{text}</p>
         </div>
       </div>
-
+<Service />
 <Feature/>
-
+<Team />
       <Contact />
 
       

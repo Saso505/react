@@ -8,11 +8,11 @@ export default function Contact() {
   return (
     <>
 
-      <div id="contact" className="contact py-32  w-full   ">
+      <div id="Contact" className="contact py-32  w-full   ">
         
         {/* Outer container with border */}
     <div className="head-contact flex justify-center items-center py-10" >
-      <h2 className='font-Abril text-slate-100  text-5xl'>Contact</h2>
+      <h1 className='font-Abril text-slate-100  text-5xl'>Contact</h1>
     </div>
           
           {/* Image Section */}

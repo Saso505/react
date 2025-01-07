@@ -27,3 +27,24 @@
   -webkit-backdrop-filter: blur(10px); /* For Safari support */
 
 }
+/* Navbar.module.css */
+.navbar-transition {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.scrolled {
+
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+.nav-link {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #0077ff;
+  transform: scale(1.05);
+}
