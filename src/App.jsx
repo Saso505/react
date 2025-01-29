@@ -7,8 +7,9 @@ import Profile from "./components/Profile/Profile";
 import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Contact from "./components/Contact/Contact";
+import USerContextProvider from "./Context/UserContext";
 
-let x = createBrowserRouter([
+let routers = createBrowserRouter([
   {
     path: "",
     element: <Layout />,
@@ -17,7 +18,7 @@ let x = createBrowserRouter([
       { path: "/home", element: <Home /> },
       {
         path: "/home/contact",
-        element: <Contact />,  // Nested route for team inside /home
+        element: <Contact />,
       },
       { path: "/archives", element: <Archives /> },
 
@@ -32,7 +33,9 @@ let x = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={x}></RouterProvider>
+      <USerContextProvider>
+        <RouterProvider router={routers}></RouterProvider>
+      </USerContextProvider>
     </>
   );
 }

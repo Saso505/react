@@ -1,31 +1,27 @@
- /*.bgnav{
+/*.bgnav{
     box-shadow: 
       rgba(0, 0, 0, 0.924) 30px 0px 80px -12px inset, /* Right side 
       rgba(0, 0, 0, 0.924) -30px 0px 80px -12px inset; /* Left side  
       height: auto;
-     background: #262463   ;
+      background: #262463   ;
 
 }
       
-  */ 
-  
+  */
+
 .glassNavcontainer {
-   
+  background: #6472ba6d;
 
-  background: #6472ba6d;; 
-
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    backdrop-filter: blur(10px); /* Frosted-glass blur effect */
-    -webkit-backdrop-filter: blur(10px);
-    /* For Safari support */
-   
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  backdrop-filter: blur(10px); /* Frosted-glass blur effect */
+  -webkit-backdrop-filter: blur(10px);
+  /* For Safari support */
 }
-.nlogin{
+.nlogin {
   background: #6472ba6d;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   backdrop-filter: blur(10px); /* Frosted-glass blur effect */
   -webkit-backdrop-filter: blur(10px); /* For Safari support */
-
 }
 /* Navbar.module.css */
 .navbar-transition {
@@ -33,12 +29,8 @@
 }
 
 .scrolled {
-
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-
-
 
 .nav-link {
   transition: color 0.3s ease, transform 0.3s ease;
