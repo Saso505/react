@@ -13,7 +13,7 @@ export default function Login() {
   let Navigate = useNavigate();
   const [Loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);
-  let { setUserData } = useContext(UserContext);
+  let { setUserData , setUserId  } = useContext(UserContext);
 
   //validation
   let validation = yup.object().shape({
@@ -38,11 +38,24 @@ export default function Login() {
         `https://apipermisson.runasp.net/api/Auth/login`,
         formValue
       );
+      console.log(data);
+
+
+ 
+
+
+
+
       if (data.isAuthenticated) {
         localStorage.setItem("userToken", data.token);
+        localStorage.setItem("userId", data.id);
         formik.resetForm();
         Navigate("/");
         setUserData(data.token);
+        setUserId(data.id);
+    
+   
+        
       }
       setStatus(data.message);
       setLoading(false);
@@ -74,8 +87,8 @@ export default function Login() {
               <div className='glass-container sm:w-[34.785rem] sm:h-[34.758rem] xsm:w-[350px] xsm:h-[500px] '>
                 <h1
                   className={`${style.highlight} sm:text-[3rem] xsm:text-3xl  py-4 `}>
-                  {" "}
-                  Eye of Veritas{" "}
+               
+                  Eye of Veritas
                 </h1>
 
                 <div className='relative sm:mt-1 z-0 w-3/4 py-5 group'>

@@ -3,6 +3,7 @@ import React from "react";
 import style from "./Contact.module.css";
 import imgContact from "../../assets/contact-img.svg";
 
+
 export default function Contact() {
   return (
     <>

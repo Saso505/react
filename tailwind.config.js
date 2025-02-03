@@ -27,9 +27,14 @@ export default {
     },
     fontFamily: {
       lato: ["Lato", "sans-serif"],
-
+      inter: ["Inter", "serif"],
       Abril: ["Abril Fatface", " serif"],
       serif: ["Merriweather", "serif"],
+    },
+
+    boxShadow: {
+      whiteShadow: "0 4px 10px rgba(255, 255, 255, 0.1)",
+      custom: "0 4px 10px rgba(0, 0, 0, 0.1)",
     },
   },
   plugins: [flowbitePlugin],

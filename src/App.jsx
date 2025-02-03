@@ -11,7 +11,7 @@ import USerContextProvider from "./Context/UserContext";
 
 let routers = createBrowserRouter([
   {
-    path: "",
+    h: "",
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
@@ -25,7 +25,6 @@ let routers = createBrowserRouter([
       { path: "/profile", element: <Profile /> },
     ],
   },
-
   { path: "/register", element: <Register /> },
   { path: "/login", element: <Login /> },
   { path: "*", element: <h1>404 Not Found</h1> },
