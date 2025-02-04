@@ -1,23 +1,46 @@
-import { useEffect, useState } from "react";
-import { createContext } from "react";
+import { useEffect, useState, createContext } from "react";
 
-// eslint-disable-next-line react-refresh/only-export-components
-export let UserContext = createContext();
+export const UserContext = createContext();
 
-export default function USerContextProvider({ children }) {
-  const [userData, setUserData] = useState(null);
+export default function UserContextProvider({ children }) {
+  const [userData, setUserData] = useState(() => {
+    // Load user token from localStorage, or return null if not found
+    return localStorage.getItem("userToken") || null;
+  });
 
-  const [userId, setUserId] = useState(null);
-
+  const [userId, setUserId] = useState(() => {
+    // Load userId from localStorage, or return null if not found
+    return localStorage.getItem("userId") || null;
+  });
 
   useEffect(() => {
+    // When userData changes, update it in localStorage
+    if (userData) {
+      localStorage.setItem("userToken", userData);
+    } else {
+      localStorage.removeItem("userToken");
+    }
+  }, [userData]);
 
-    if (localStorage.getItem("userToken") !== null) {
-      setUserData(localStorage.getItem("userToken"));
+  useEffect(() => {
+    // When userId changes, update it in localStorage
+    if (userId) {
+      localStorage.setItem("userId", userId);
+    } else {
+      localStorage.removeItem("userId");
+    }
+  }, [userId]);
 
+  useEffect(() => {
+    // Update context with data from localStorage when the app starts
+    const storedUserData = localStorage.getItem("userToken");
+    const storedUserId = localStorage.getItem("userId");
+
+    if (storedUserData && storedUserId) {
+      setUserData(storedUserData);
+      setUserId(storedUserId);
     }
   }, []);
-
 
   return (
     <UserContext.Provider value={{ userData, setUserData, userId, setUserId }}>

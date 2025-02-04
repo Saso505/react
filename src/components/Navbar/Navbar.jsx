@@ -16,7 +16,6 @@ export default function Navbar() {
 
   let { userData, setUserData } = useContext(UserContext);
 
-
   useEffect(() => {
     const path = location.pathname;
     if (path === "/home" || path === "/") {
@@ -26,7 +25,6 @@ export default function Navbar() {
     } else if (path === "/profile") {
       setActiveLink("profile");
     } else {
-
       const sectionId = path.slice(1);
       if (SectionId.includes(sectionId)) {
         setActiveLink(sectionId);
@@ -34,11 +32,12 @@ export default function Navbar() {
     }
   }, [location.pathname]);
 
-
   function handelLogout() {
     localStorage.removeItem("userToken");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userData");
     setUserData(null);
-    navigate("/login");
+    // navigate("/login");
   }
 
   // Smooth scroll to sections
@@ -108,8 +107,9 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`${style.navbarTransition} ${isScrolled ? style.scrolled : ""
-        } fixed w-full z-20 top-0 px-8`}>
+      className={`${style.navbarTransition} ${
+        isScrolled ? style.scrolled : ""
+      } fixed w-full z-20 top-0 px-8`}>
       <div className='max-w-screen-xl flex items-center justify-between mx-auto'>
         {/* Logo */}
         <a href='/' className='flex items-center space-x-3 rtl:space-x-reverse'>
@@ -140,39 +140,44 @@ export default function Navbar() {
 
         {/* Navigation Links */}
         <div
-          className={`${style.glassNavcontainer} ${isMenuOpen
+          className={`${style.glassNavcontainer} ${
+            isMenuOpen
               ? "flex absolute top-20 left-0 right-0 rounded"
               : "hidden"
-            } md:px-[1rem] lg:px-[3rem] md:py-[0.3rem] lg:py-[0.5rem] md:rounded-full md:space-x-8 rounded-md items-center justify-between md:flex md:w-auto md:order-1`}
+          } md:px-[1rem] lg:px-[3rem] md:py-[0.3rem] lg:py-[0.5rem] md:rounded-full md:space-x-8 rounded-md items-center justify-between md:flex md:w-auto md:order-1`}
           id='navbar-menu'>
           <ul className='flex flex-col md:flex-row items-center gap-4 md:gap-8 xsm:w-full md:w-auto md:bg-transparent md:rounded-full p-4 md:p-0 xsm:justify-center'>
             <li
-              className={`${activeLink === "home"
+              className={`${
+                activeLink === "home"
                   ? `relative after:absolute after:w-7 after:h-[0.125rem] after:left-4 after:bg-[#0077ff]`
                   : ""
-                }`}>
+              }`}>
               <button
                 onClick={() => handlePageNavigation("/home")}
-                className={`block font-lato xl:mx-2 xl:px-2 rounded ${activeLink === "home"
+                className={`block font-lato xl:mx-2 xl:px-2 rounded ${
+                  activeLink === "home"
                     ? `text-[#0077ff] font-semibold`
                     : "text-slate-100"
-                  }`}>
+                }`}>
                 Home
               </button>
             </li>
             {SectionId.map((sectionId, i) => (
               <li
                 key={i}
-                className={`${activeLink === sectionId
+                className={`${
+                  activeLink === sectionId
                     ? `relative after:absolute after:w-7 after:h-[0.125rem] after:left-4 after:bg-[#0077ff]`
                     : ""
-                  }`}>
+                }`}>
                 <button
                   onClick={() => scrollToSection(sectionId)}
-                  className={`block font-lato xl:mx-2 xl:px-2 rounded ${activeLink === sectionId
+                  className={`block font-lato xl:mx-2 xl:px-2 rounded ${
+                    activeLink === sectionId
                       ? `text-[#0077ff] font-semibold`
                       : "text-slate-100"
-                    }`}>
+                  }`}>
                   {sectionId}
                 </button>
               </li>
@@ -180,30 +185,34 @@ export default function Navbar() {
             {userData ? (
               <>
                 <li
-                  className={`${activeLink === "archives"
+                  className={`${
+                    activeLink === "archives"
                       ? `relative after:absolute after:w-7 after:h-[0.125rem] after:left-4 after:bg-[#0077ff]`
                       : ""
-                    }`}>
+                  }`}>
                   <button
                     onClick={() => handlePageNavigation("/archives")}
-                    className={`block font-lato xl:mx-2 xl:px-2 rounded ${activeLink === "archives"
+                    className={`block font-lato xl:mx-2 xl:px-2 rounded ${
+                      activeLink === "archives"
                         ? `text-[#0077ff] font-semibold`
                         : "text-slate-100"
-                      }`}>
+                    }`}>
                     Archives
                   </button>
                 </li>
                 <li
-                  className={`${activeLink === "profile"
+                  className={`${
+                    activeLink === "profile"
                       ? `relative after:absolute after:w-7 after:h-[0.125rem] after:left-4 after:bg-[#0077ff]`
                       : ""
-                    }`}>
+                  }`}>
                   <button
                     onClick={() => handlePageNavigation("/profile")}
-                    className={`block font-lato xl:mx-2 xl:px-2 rounded ${activeLink === "profile"
+                    className={`block font-lato xl:mx-2 xl:px-2 rounded ${
+                      activeLink === "profile"
                         ? `text-[#0077ff] font-semibold`
                         : "text-slate-100"
-                      }`}>
+                    }`}>
                     Profile
                   </button>
                 </li>

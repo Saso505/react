@@ -13,7 +13,7 @@ export default function Login() {
   let Navigate = useNavigate();
   const [Loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);
-  let { setUserData , setUserId  } = useContext(UserContext);
+  let { setUserData, setUserId } = useContext(UserContext);
 
   //validation
   let validation = yup.object().shape({
@@ -40,12 +40,6 @@ export default function Login() {
       );
       console.log(data);
 
-
- 
-
-
-
-
       if (data.isAuthenticated) {
         localStorage.setItem("userToken", data.token);
         localStorage.setItem("userId", data.id);
@@ -53,9 +47,6 @@ export default function Login() {
         Navigate("/");
         setUserData(data.token);
         setUserId(data.id);
-    
-   
-        
       }
       setStatus(data.message);
       setLoading(false);
@@ -87,7 +78,6 @@ export default function Login() {
               <div className='glass-container sm:w-[34.785rem] sm:h-[34.758rem] xsm:w-[350px] xsm:h-[500px] '>
                 <h1
                   className={`${style.highlight} sm:text-[3rem] xsm:text-3xl  py-4 `}>
-               
                   Eye of Veritas
                 </h1>
 
