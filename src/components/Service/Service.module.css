@@ -1,5 +1,5 @@
 .startGlassB  {
-    background: linear-gradient(135deg, rgba(20, 7, 96, 0.419), rgba(255, 255, 255, 0.05));
+    background: linear-gradient(135deg, rgba(20, 7, 96, 0.419), #ffffff0d);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);

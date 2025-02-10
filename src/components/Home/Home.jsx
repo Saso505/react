@@ -6,7 +6,9 @@ import Feature from "../Feature/Feature";
 import Service from "../Service/Service";
 import Team from "../Team/Team";
 
+
 export default function Home() {
+ 
   // State initialization (you can uncomment it if required for future functionality)
   const heading = "Trust with AI-powered";
   const text = `the power of artificial intelligence to detect deception with unparalleled accuracy. 

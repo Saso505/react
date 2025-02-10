@@ -157,55 +157,71 @@ export default function Team() {
           ))}
         </Swiper>
 
-        {/* Info box for selected member */}
-        {selectedMember !== null && (
-          <div className='fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60 z-50'>
-            <div className='bg-white p-6 rounded-lg shadow-lg text-center relative sm:w-[300px] md:w-[400px] h-[250px]'>
-              <button
-                className='absolute top-2 right-2 text-gray-600 text-xl'
-                onClick={() => {
-                  setSelectedMember(null);
-                  if (swiperRef.current) {
-                    swiperRef.current.swiper.autoplay.start();
-                  }
-                }}>
-                &times;
-              </button>
-              <img
-                src={teamMembers[selectedMember].img}
-                alt={teamMembers[selectedMember].name}
-                className='w-32 h-32 rounded-full mx-auto mb-4'
-              />
-              <div className='allData flex justify-between items-center '>
-                <div className='team-member-info text-start'>
-                  <h3 className='font-Abril text-[rgb(25,30,63)] text-xl'>
-                    {teamMembers[selectedMember].name}
-                  </h3>
-                  <p className='font-Poppins text-gray-500 text-base'>
-                    {teamMembers[selectedMember].position}
-                  </p>
-                </div>
+       
+{selectedMember !== null && (
+  <div
+    className='fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60 z-50'
+    onClick={() => {
+      setSelectedMember(null);
+      if (swiperRef.current) {
+        swiperRef.current.swiper.autoplay.start();
+      }
+    }}>
+    <div
+      className='bg-white p-6 rounded-lg shadow-lg text-center  w-[350px] md:w-[420px] h-[150px]  relative'
+      style={{ boxShadow: "0 4px 10px rgba(255, 255, 255, 0.2)" }}
+      onClick={(e) => e.stopPropagation()} 
+    >
+      <button
+        className='absolute top-2 right-2 text-gray-600 text-xl'
+        onClick={() => {
+          setSelectedMember(null);
+          if (swiperRef.current) {
+            swiperRef.current.swiper.autoplay.start();
+          }
+        }}>
+        &times;
+      </button>
+      <div className='allData flex justify-between items-center  '>
+      <div className="imge">
+      <img
+        src={teamMembers[selectedMember].img}
+        alt={teamMembers[selectedMember].name}
+        className=' w-36 h-36 rounded-full mx-auto mb-4  border-spacing-16 border drop-shadow-xl shadow-black border-[#262463] absolute -top-10  md:left-5 -left-3'
+      />
+      </div>
+ 
+    
+        <div className='team-member-info text-start '>
+          <h3 className='font-Abril text-[rgb(25,30,63)] md:text-xl text-md'>
+            {teamMembers[selectedMember].name}
+          </h3>
+          <p className='font-Poppins text-gray-400 text-sm '>
+            {teamMembers[selectedMember].position}
+          </p>
+              
+          <h4 className='font-Poppins text-gray-900 text-xl capitalize font-Abril font-medium py-3'>
+          
+          </h4>
+          <a href={teamMembers[selectedMember].facebook} className="bg-[#262463eb] px-3 py-2 rounded-full">
+            <i className='fa-brands fa-facebook-f text-white '></i>
+          </a>
+          <a href={teamMembers[selectedMember].link} className='bg-[#262463eb] px-3 py-2 rounded-full ms-6 me-3 '>
+            <i className='text-white fa-brands fa-linkedin-in text-lg '></i>
+          </a>
+          <a href={teamMembers[selectedMember].cv} className="bg-[#262463eb] px-3 py-2 rounded-full ms-3 me-3 ">
+            <i className='fa-solid fa-user text-white text-lg '></i>
+          </a>
+        </div>
 
-                <div className='social-media '>
-                  <h4 className='font-Poppins text-gray-900 text-xl capitalize font-Abril font-medium'>
-                    Social Links
-                  </h4>
-                  <a href={teamMembers[selectedMember].facebook}>
-                    <i className='fa-brands  fa-facebook-f  text-[#191e3f] text-lg  mx-2'></i>
-                  </a>
-                  <a href={teamMembers[selectedMember].link}>
-                    {" "}
-                    <i className='text-teal-800 fa-brands  fa-linkedin-in text-lg'></i>
-                  </a>
-                  <a href={teamMembers[selectedMember].cv}>
-                    {" "}
-                    <i className='fa-solid fa-user text-slate-500 text-lg mx-2'></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+  
+        </div>
+     
+    </div>
+  </div>
+)}
+
+  
       </div>
     </div>
   );

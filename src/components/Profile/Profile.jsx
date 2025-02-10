@@ -2,13 +2,18 @@ import { useState, useRef, useContext, useEffect } from "react";
 import photo from "../../assets/photo.jpg";
 import { UserContext } from "../../Context/UserContext";
 import axios from "axios";
+import style from './Profile.module.css'
+
 
 export default function Profile() {
+  const [loading, setLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [image, setImage] = useState(null);
   const hiddenFileInput = useRef(null);
   const [data, setData] = useState({});
   const { userId, setUserId } = useContext(UserContext);
+
+
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -55,6 +60,7 @@ export default function Profile() {
 
   async function getData(userId) {
     try {
+      setLoading(true);
       const response = await axios.get(
         `https://apipermisson.runasp.net/api/User/GetUser/${userId}`,
         {
@@ -65,12 +71,15 @@ export default function Profile() {
       );
       console.log("User data fetched:", response.data);
 
+
       setData(response.data);
       localStorage.setItem("userData", JSON.stringify(response.data)); // Store in localStorage
       setIsDisabled(true);
+      setLoading(false);
     } catch (error) {
       alert("Error fetching data. Please try again later.");
       console.error("Error fetching data:", error);
+      setLoading(false);
     }
   }
 
@@ -85,10 +94,7 @@ export default function Profile() {
     }
   }, [setUserId]);
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   setIsDisabled(false);
-  // };
+
 
   const handleClick = () => {
     hiddenFileInput.current.click();
@@ -102,6 +108,7 @@ export default function Profile() {
     };
 
     try {
+
       await axios.put(
         `https://apipermisson.runasp.net/api/User/UpdateUser`,
         updatedData,
@@ -130,7 +137,11 @@ export default function Profile() {
     }
   };
 
-  return (
+  return loading ? (
+    <div className="flex justify-center   items-center h-screen bg">
+      <span className={`${style.loader} `}></span>{" "} 
+    </div>
+  ) : (
     <div
       className='profile bg h-screen flex flex-col justify-center items-center px-5 sm:px-0'
       id='Profile'>
@@ -140,9 +151,8 @@ export default function Profile() {
         <div className='form md:w-full sm:w-3/4 xsm:w-full sm:order-1 xsm:order-2'>
           <form onSubmit={handleUpdate}>
             <div
-              className={`relative flex py-5 z-0 w-full group ${
-                isDisabled ? "space-x-2 flex-row-reverse" : ""
-              }`}>
+              className={`relative flex py-5 z-0 w-full group ${isDisabled ? "space-x-2 flex-row-reverse" : ""
+                }`}>
               <input
                 type='text'
                 name='name'
@@ -151,76 +161,68 @@ export default function Profile() {
                 value={data.userName || ""}
                 onChange={(e) => setData({ ...data, userName: e.target.value })}
                 aria-label='Name input field'
-                className={`block w-full px-0 text-lg text-gray-300 bg-transparent ${
-                  isDisabled
-                    ? "border-none px-7 py-0 mt "
-                    : "border-b-2 border-gray-300 focus:border-gray-500 border-0"
-                }`}
+                className={`block w-full px-0 text-lg text-gray-300 bg-transparent ${isDisabled
+                  ? "border-none px-7 py-0 mt "
+                  : "border-b-2 border-gray-300 focus:border-gray-500 border-0"
+                  }`}
                 placeholder=' '
               />
               <label
                 htmlFor='name'
-                className={`peer-focus:font-medium font-Abril text-lg text-gray-300 dark:text-white duration-300 ${
-                  isDisabled
-                    ? "flex text-2xl"
-                    : "absolute transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-4"
-                }`}>
+                className={`peer-focus:font-medium font-Abril text-lg text-gray-300 dark:text-white duration-300 ${isDisabled
+                  ? "flex text-2xl"
+                  : "absolute transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-4"
+                  }`}>
                 Name:
               </label>
             </div>
 
             <div
-              className={`relative flex py-5 z-0 w-full group ${
-                isDisabled ? "space-x-2 flex-row-reverse" : ""
-              }`}>
+              className={`relative flex py-5 z-0 w-full group ${isDisabled ? "space-x-2 flex-row-reverse" : ""
+                }`}>
               <input
                 type='email'
                 name='email'
                 id='email'
                 disabled={isDisabled}
                 value={data.email || ""}
-                className={`block w-full px-0 text-lg text-gray-300 bg-transparent ${
-                  isDisabled
-                    ? "border-none px-7 py-0 mt"
-                    : "border-b-2 border-gray-300 focus:border-gray-300 border-0"
-                }`}
+                className={`block w-full px-0 text-lg text-gray-300 bg-transparent ${isDisabled
+                  ? "border-none px-7 py-0 mt"
+                  : "border-b-2 border-gray-300 focus:border-gray-300 border-0"
+                  }`}
                 placeholder=' '
               />
               <label
                 htmlFor='email'
-                className={`peer-focus:font-medium font-Abril text-lg text-gray-300 dark:text-white duration-300 ${
-                  isDisabled
-                    ? "flex text-2xl"
-                    : "absolute transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-4"
-                }`}>
+                className={`peer-focus:font-medium font-Abril text-lg text-gray-300 dark:text-white duration-300 ${isDisabled
+                  ? "flex text-2xl"
+                  : "absolute transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-4"
+                  }`}>
                 Email:
               </label>
             </div>
 
             <div
-              className={`relative flex py-5 z-0 w-full group ${
-                isDisabled ? "space-x-2 flex-row-reverse" : ""
-              }`}>
+              className={`relative flex py-5 z-0 w-full group ${isDisabled ? "space-x-2 flex-row-reverse" : ""
+                }`}>
               <input
                 type='tel'
                 name='phone'
                 id='phone'
                 disabled={isDisabled}
                 value={data.phoneNumber || ""}
-                className={`block w-full px-0 text-lg text-gray-300 bg-transparent ${
-                  isDisabled
-                    ? "border-none px-7 py-0 mt"
-                    : "border-b-2 border-gray-300 focus:border-gray-300 border-0 "
-                }`}
+                className={`block w-full px-0 text-lg text-gray-300 bg-transparent ${isDisabled
+                  ? "border-none px-7 py-0 mt"
+                  : "border-b-2 border-gray-300 focus:border-gray-300 border-0 "
+                  }`}
                 placeholder=' '
               />
               <label
                 htmlFor='phone'
-                className={`peer-focus:font-medium font-Abril text-lg text-gray-300 dark:text-white duration-300 ${
-                  isDisabled
-                    ? "flex text-2xl"
-                    : "absolute transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-4"
-                }`}>
+                className={`peer-focus:font-medium font-Abril text-lg text-gray-300 dark:text-white duration-300 ${isDisabled
+                  ? "flex text-2xl"
+                  : "absolute transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-4"
+                  }`}>
                 Phone:
               </label>
             </div>
@@ -284,5 +286,7 @@ export default function Profile() {
         </div>
       </div>
     </div>
-  );
-}
+  )
+};
+
+

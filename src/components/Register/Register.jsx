@@ -10,7 +10,10 @@ import * as yup from "yup";
 import { Alert } from "flowbite-react";
 import { useContext } from "react";
 import { UserContext } from "../../Context/UserContext";
+import toast from "react-hot-toast";
 
+
+ 
 export default function Register() {
   let Navigate = useNavigate();
   const [Loading, setLoading] = useState(false);
@@ -67,7 +70,8 @@ export default function Register() {
         Navigate("/");
         setUserData(data.token);
       }
-      setStatus(data.message);
+    toast.success(data.message);
+    
       setLoading(false);
     } catch (err) {
       console.log(err.response.data);
@@ -91,13 +95,7 @@ export default function Register() {
 
   return (
     <>
-      {status && (
-        <div className='fixed top-0 left-2/4 right-0 z-50'>
-          <Alert className='transition-opacity duration-500 ease-in-out'>
-            <span className='font-medium'>{status}</span>
-          </Alert>
-        </div>
-      )}
+   
       <div className='register  bg body items-center w-full justify-center flex h-screen '>
         <div className='container  items-center  justify-center flex  mx-auto'>
           <div className='row xsm:hidden lg:block '>

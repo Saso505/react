@@ -7,7 +7,8 @@ import { useFormik } from "formik";
 import axios from "axios";
 import * as yup from "yup";
 import { UserContext } from "../../Context/UserContext";
-import { Alert } from "flowbite-react";
+
+import toast from "react-hot-toast";
 
 export default function Login() {
   let Navigate = useNavigate();
@@ -43,15 +44,21 @@ export default function Login() {
       if (data.isAuthenticated) {
         localStorage.setItem("userToken", data.token);
         localStorage.setItem("userId", data.id);
+
+        toast.success(data.message); // Show success message before navigating
+
         formik.resetForm();
-        Navigate("/");
+
+        setTimeout(() => {
+          Navigate('/')
+        }, 1000);
+
         setUserData(data.token);
         setUserId(data.id);
       }
-      setStatus(data.message);
-      setLoading(false);
     } catch (err) {
-      setStatus(err.response.data);
+      toast.error(err.response?.data || "Something went wrong!");
+    } finally {
       setLoading(false);
     }
   }
@@ -64,13 +71,7 @@ export default function Login() {
 
   return (
     <>
-      {status && (
-        <div className='fixed top-0 left-2/4 right-0 z-50'>
-          <Alert className='transition-opacity duration-500 ease-in-out'>
-            <span className='font-medium'>{status}</span>
-          </Alert>
-        </div>
-      )}
+
       <div className='login  bg  body items-center w-full justify-center flex h-screen '>
         <div className='container  items-center  justify-center flex '>
           <div className='row'>

@@ -8,6 +8,8 @@ import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Contact from "./components/Contact/Contact";
 import USerContextProvider from "./Context/UserContext";
+import { Toaster } from "react-hot-toast";
+import ArchiveDetails from "./components/ArchivesDetails/ArchiveDetails";
 
 let routers = createBrowserRouter([
   {
@@ -23,8 +25,10 @@ let routers = createBrowserRouter([
       { path: "/archives", element: <Archives /> },
 
       { path: "/profile", element: <Profile /> },
+      { path: "/archived", element: <ArchiveDetails /> } 
     ],
   },
+
   { path: "/register", element: <Register /> },
   { path: "/login", element: <Login /> },
   { path: "*", element: <h1>404 Not Found</h1> },
@@ -34,6 +38,7 @@ function App() {
     <>
       <USerContextProvider>
         <RouterProvider router={routers}></RouterProvider>
+        <Toaster></Toaster>
       </USerContextProvider>
     </>
   );
