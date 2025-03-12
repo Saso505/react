@@ -39,7 +39,7 @@ function App() {
   return (
     <>
       <USerContextProvider>
-        <Router></Router>
+
         <RouterProvider router={routers}></RouterProvider>
         <Toaster></Toaster>
       </USerContextProvider>
