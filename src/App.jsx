@@ -10,6 +10,8 @@ import Contact from "./components/Contact/Contact";
 import USerContextProvider from "./Context/UserContext";
 import { Toaster } from "react-hot-toast";
 import ArchiveDetails from "./components/ArchivesDetails/ArchiveDetails";
+import { BrowserRouter as Router } from "react-router-dom";
+
 
 let routers = createBrowserRouter([
   {
@@ -25,7 +27,7 @@ let routers = createBrowserRouter([
       { path: "/archives", element: <Archives /> },
 
       { path: "/profile", element: <Profile /> },
-      { path: "/archived", element: <ArchiveDetails /> } 
+      { path: "/archived", element: <ArchiveDetails /> }
     ],
   },
 
@@ -37,6 +39,7 @@ function App() {
   return (
     <>
       <USerContextProvider>
+        <Router></Router>
         <RouterProvider router={routers}></RouterProvider>
         <Toaster></Toaster>
       </USerContextProvider>
