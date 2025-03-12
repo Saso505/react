@@ -1,4 +1,5 @@
 {
+  "homepage": "https://Saso505.github.io/react",
   "name": "second-project",
   "private": true,
   "version": "0.0.0",
@@ -7,7 +8,9 @@
     "dev": "vite ",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
@@ -24,7 +27,7 @@
     "react-router-dom": "^7.0.2",
     "react-scroll": "^1.9.0",
     "react-spinners": "^0.15.0",
-    "swiper": "^11.2.2",
+    "swiper": "^11.2.3",
     "yup": "^1.6.1"
   },
   "devDependencies": {
@@ -37,6 +40,7 @@
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
+    "gh-pages": "^6.3.0",
     "globals": "^15.11.0",
     "postcss": "^8.4.48",
     "tailwindcss": "^3.4.14",
