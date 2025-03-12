@@ -4,44 +4,36 @@ import Login from "./components/Login/Login";
 import Archives from "./components/Archives/Archives";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
-import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";  // 🔹 Use createHashRouter for GitHub Pages
 import Layout from "./components/Layout/Layout";
 import Contact from "./components/Contact/Contact";
 import USerContextProvider from "./Context/UserContext";
 import { Toaster } from "react-hot-toast";
 import ArchiveDetails from "./components/ArchivesDetails/ArchiveDetails";
-import { BrowserRouter as Router } from "react-router-dom";
 
-
-let routers = createBrowserRouter([
+let routers = createHashRouter([
   {
-    h: "",
+    path: "",  // 🔹 Fixed incorrect property name
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: "/home", element: <Home /> },
-      {
-        path: "/home/contact",
-        element: <Contact />,
-      },
-      { path: "/archives", element: <Archives /> },
-
-      { path: "/profile", element: <Profile /> },
-      { path: "/archived", element: <ArchiveDetails /> }
+      { path: "home", element: <Home /> },
+      { path: "home/contact", element: <Contact /> },
+      { path: "archives", element: <Archives /> },
+      { path: "profile", element: <Profile /> },
+      { path: "archived", element: <ArchiveDetails /> }
     ],
   },
-
-  { path: "/register", element: <Register /> },
-  { path: "/login", element: <Login /> },
-  { path: "*", element: <h1>404 Not Found</h1> },
+  { path: "register", element: <Register /> },
+  { path: "login", element: <Login /> },
 ]);
+
 function App() {
   return (
     <>
       <USerContextProvider>
-
-        <RouterProvider router={routers}></RouterProvider>
-        <Toaster></Toaster>
+        <RouterProvider router={routers} />
+        <Toaster />
       </USerContextProvider>
     </>
   );
