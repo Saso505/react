@@ -1,14 +1,11 @@
 /* eslint-disable */
-import React from "react";
-import homebg from "../../assets/eyevideo.mp4";
+import homeBg from "../../assets/eyevideo.mp4";
 import Contact from "../Contact/Contact";
 import Feature from "../Feature/Feature";
 import Service from "../Service/Service";
 import Team from "../Team/Team";
 
-
 export default function Home() {
- 
   // State initialization (you can uncomment it if required for future functionality)
   const heading = "Trust with AI-powered";
   const text = `the power of artificial intelligence to detect deception with unparalleled accuracy. 
@@ -26,7 +23,7 @@ export default function Home() {
               loop
               muted
               playsInline>
-              <source src={homebg} type='video/mp4' />
+              <source src={homeBg} type='video/mp4' />
             </video>
           </div>
 
